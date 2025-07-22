@@ -8,7 +8,7 @@ This container automatically clones, builds, and launches the server on startup.
 ## 🚀 Features
 
 - 🔁 Pulls and builds the latest version on **every container start**  
-- 💾 Uses a bind mount (`/your/path:/data`) to persist all game/world data  
+- 💾 Uses a bind mount (`/your/local/path/data:/data`) to persist all game/world data  
 - ⚠️ Detects missing `/data` mounts  
 - 🧠 Warns users if `-it` is missing (required for server startup)  
 - 🎮 Exposes RuneScape Classic server port `43594` by default  
@@ -40,7 +40,7 @@ docker build -t rscsundae .
 ### ✅ With a bind mount
 
 ```bash
-docker run -it -p 43594:43594 -v /your/local/path:/data rscsundae
+docker run -it -p 43594:43594 -v /your/local/path/data:/data rscsundae
 ```
 
 > ⚠️ The server will refuse to start if `-it` is not passed.  
@@ -59,7 +59,7 @@ services:
     ports:
       - "43594:43594"
     volumes:
-      - /opt/rscsundae/data:/data
+      - /your/local/path/data:/data
     stdin_open: true   # Ensures interactive mode (-it)
     tty: true
     restart: unless-stopped
